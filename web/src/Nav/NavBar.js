@@ -1,5 +1,4 @@
 import React from 'react';
-
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -27,9 +26,9 @@ class NavBar extends React.Component {
         this.setState({ anchorEl: null, open: false });
     };
 
-    // handleClickAway = () => {
-    //     this.setState({ open: false });
-    // };
+    handleClickAway = () => {
+        this.setState({ open: false });
+    };
 
     render() {
         return (
@@ -39,15 +38,16 @@ class NavBar extends React.Component {
                         Bill Tracker
                     </Typography>
                     <div>
-                        <IconButton
-                            aria-owns={this.state.open ? 'menu-appbar' : null}
-                            aria-haspopup='true'
-                            onClick={this.handleMenu}
-                            onClickAway={this.handleClose}
-                            color='inherit'
-                        >
-                            <MenuIcon />
-                        </IconButton>
+                        <ClickAwayListener onClickAway={this.handleClickAway}>
+                            <IconButton
+                                aria-owns={this.state.open ? 'menu-appbar' : null}
+                                aria-haspopup='true'
+                                onClick={this.handleMenu}
+                                color='inherit'
+                            >
+                                <MenuIcon />
+                            </IconButton>
+                        </ClickAwayListener>
                         <Menu
                             id='menu-appbar'
                             anchorEl={this.state.anchorEl}
@@ -62,8 +62,7 @@ class NavBar extends React.Component {
                             open={this.state.open}
                             onClose={this.handleClose}
                         >
-                            <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                            <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                            <MenuItem onClick={this.handleClose}>Add Bills</MenuItem>
                         </Menu>
                     </div>
                 </Toolbar>

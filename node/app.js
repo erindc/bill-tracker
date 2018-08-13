@@ -1,4 +1,5 @@
 const express = require('express');
+const expressValidator = require("express-validator");
 const morgan = require('morgan');
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
@@ -12,8 +13,11 @@ if (dotenv.error != null) {
 const app = express();
 
 app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({ extended: true }));
-    app.use(morgan('common'))
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressValidator());
+app.use(morgan('tiny'));
+require('./bills/routes')(app);
+require('./paychecks/routes')(app);
 
 
 app.all(process.env.API_BASE + "*", (req, res, next) => {
@@ -22,7 +26,7 @@ app.all(process.env.API_BASE + "*", (req, res, next) => {
 
 
 const port = process.env.PORT;
-const server = app.listen(port, () => {
+app.listen(port, () => {
     console.log(`Listening on port ${port}.\nBase URL: ${process.env.API_BASE}`);
 });
 
