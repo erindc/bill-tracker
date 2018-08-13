@@ -1,19 +1,36 @@
 import React, { Component } from 'react';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import orange from '@material-ui/core/colors/orange';
+import Grid from '@material-ui/core/Grid';
+import NavBar from './Nav/NavBar';
 import './App.css';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+    render() {
+        const theme = createMuiTheme({
+            palette: {
+                primary: {
+                    main: '#4dd0e1',
+                },
+                secondary: {
+                    main: '#ffa726',
+                },
+            },
+            status: {
+                danger: 'orange',
+            },
+        });
+
+        return (
+            <MuiThemeProvider theme={theme}>
+                <div className="flexGrow1">
+                    <Grid container spacing={24}>
+                        <NavBar />
+                    </Grid>
+                </div>
+            </MuiThemeProvider>
+        );
+    }
 }
 
 export default App;
