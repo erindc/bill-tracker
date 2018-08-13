@@ -1,7 +1,8 @@
 const PaychecksController = require('./paychecks_controller');
 
 const routes = (app) => {
-    app.post(process.env.API_BASE + "/paycheck", PaychecksController.getPaycheck)
+    app.post(process.env.API_BASE + "/paycheck", PaychecksController.addPaycheck);
+    app.get(process.env.API_BASE + "/paycheck", PaychecksController.getPaycheck);
 };
 
 module.exports = routes;

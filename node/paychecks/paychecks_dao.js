@@ -8,7 +8,7 @@ class PaychecksDao {
     dbName  = 'billTracker';
     colName = 'paychecks';
 
-    upsertPaychecks = async (paycheck) => {
+    addPaycheck = async (paycheck) => {
         try {
             MongoClient.connect(process.env.MONGO_URL, (err, client) => {
                 if (err) {
